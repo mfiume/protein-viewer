@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIA Protein Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Top Menu Bar -->
+        <header class="top-menu">
+            <div class="menu-section">
+                <h1>ARIA Protein Viewer</h1>
+            </div>
+
+            <div class="menu-section file-controls">
+                <button onclick="openProteinSearch()">Load Protein</button>
+            </div>
+
+            <div class="menu-section viewer-controls-inline" id="viewerControlsInline" style="display: none;">
+                <div class="control-item">
+                    <label>
+                        <input type="checkbox" id="rotateToggle" onchange="toggleRotation()" />
+                        Auto-rotate
+                    </label>
+                </div>
+                <div class="control-item">
+                    <label>Style:</label>
+                    <select id="styleSelect" onchange="changeStyle()">
+                        <option value="cartoon">Cartoon</option>
+                        <option value="sphere">Sphere</option>
+                        <option value="stick">Stick</option>
+                        <option value="line">Line</option>
+                    </select>
+                </div>
+                <div class="control-item">
+                    <label>Color:</label>
+                    <select id="colorSelect" onchange="changeColor()">
+                        <option value="spectrum">Spectrum</option>
+                        <option value="chainbow">Chain</option>
+                        <option value="ss">Secondary Structure</option>
+                        <option value="element">Element</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Protein Search Sidebar -->
+        <div id="proteinSidebar" class="protein-sidebar" style="display: none;">
+            <div class="sidebar-header">
+                <h3>Load Protein</h3>
+                <button onclick="closeSidebar()">✕</button>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- Search by Gene -->
+                <div class="loader-section">
+                    <h4>Search by Gene</h4>
+                    <div class="search-inputs">
+                        <input type="text" id="geneSearch" placeholder="Gene name (e.g., SHANK3)" value="SHANK3" />
+                        <button onclick="searchGene()">Search</button>
+                    </div>
+                </div>
+
+                <!-- Load by PDB ID -->
+                <div class="loader-section">
+                    <h4>Load by PDB ID</h4>
+                    <div class="search-inputs">
+                        <input type="text" id="pdbInput" placeholder="PDB ID (e.g., 6N7Q)" />
+                        <button onclick="loadPDBById()">Load</button>
+                    </div>
+                </div>
+
+                <!-- Search Results -->
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Protein Viewer Panel -->
+        <div class="viewer-panel">
+            <div class="canvas-wrapper" id="viewerContainer">
+                <!-- 3Dmol.js will render here -->
+            </div>
+
+            <div id="proteinInfo" class="protein-info"></div>
+        </div>
+    </div>
+
+    <!-- 3Dmol.js library -->
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
